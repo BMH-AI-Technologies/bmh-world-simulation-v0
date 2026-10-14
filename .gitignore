@@ -1,0 +1,7 @@
+node_modules
+dist
+shots
+*.log
+.DS_Store
+# raw Overpass dumps (≈18 MB) — re-download with `npm run fetch-osm`; the baked map ships in public/data
+data/*.json

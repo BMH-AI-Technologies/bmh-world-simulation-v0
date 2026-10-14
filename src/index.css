@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #14161c;
+  --panel: rgba(250, 246, 238, 0.95);
+  --soft: rgba(193, 39, 45, 0.07);
+  --line: rgba(40, 30, 20, 0.12);
+  --ink: #22201c;
+  --accent: #c1272d;
+  --accent-ink: #fff8e7;
+  --gold: #f2c14e;
+  --danger: #b42318;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --panel: rgba(22, 24, 30, 0.93);
+    --soft: rgba(242, 193, 78, 0.08);
+    --line: rgba(255, 255, 255, 0.1);
+    --ink: #f1ece2;
+    --accent: #f2c14e;
+    --accent-ink: #1b1710;
+    color-scheme: dark;
+  }
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.font-display { font-family: "Lora", Georgia, serif; font-weight: 600; }
+
+.panel {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+.icon-btn {
+  display: grid; place-items: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  font-size: 15px; line-height: 1;
+}
+.icon-btn:hover { background: var(--soft); }
+.icon-btn.small { width: 26px; height: 26px; font-size: 12px; }
+.icon-btn:focus-visible, .speed-btn:focus-visible, .chip:focus-visible, .example:focus-visible, .btn-accent:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.speed-btn {
+  min-width: 32px; height: 30px; padding: 0 8px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+}
+.speed-btn.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.chip {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 4px 10px; font-size: 12px; background: var(--soft);
+}
+.example {
+  border: 1px dashed var(--line); border-radius: 999px;
+  padding: 4px 10px; font-size: 12px; text-align: left;
+}
+.example:hover { border-style: solid; border-color: var(--accent); }
+.btn-accent { background: var(--accent); color: var(--accent-ink); }
+.field {
+  background: transparent; border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px 10px; font-size: 14px; color: inherit;
+}
+.field:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+select.field option { color: #111; }
+
+/* labels floating over the 3D view */
+.lm-label {
+  font-family: "Lora", Georgia, serif; font-size: 12px; font-weight: 600;
+  color: #fff8e7; text-shadow: 0 1px 3px rgba(0,0,0,.85), 0 0 8px rgba(0,0,0,.5);
+  letter-spacing: .02em; white-space: nowrap;
+}
+.res-label { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; transform: translateY(-14px); }
+.res-label .name {
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+  background: rgba(20, 22, 28, 0.78); color: #fff8e7; padding: 2px 8px; border-radius: 999px;
+  border: 1px solid rgba(242, 193, 78, 0.45);
+}
+.res-label .name.sel { background: #c1272d; border-color: #f2c14e; }
+.res-label .bubble {
+  max-width: 220px; font-size: 12px; line-height: 1.35;
+  background: #fffdf6; color: #22201c; padding: 6px 10px; border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3); position: relative;
+  animation: pop .18s ease-out;
+}
+.res-label .bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  border: 6px solid transparent; border-top-color: #fffdf6; border-bottom: 0;
+}
+.ev-label {
+  display: flex; align-items: center; gap: 6px; max-width: 280px;
+  background: rgba(193, 39, 45, 0.92); color: #fff8e7;
+  padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35); border: 1px solid #f2c14e;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  animation: pop .25s ease-out;
+}
+.ev-label .ic { font-size: 16px; }
+@keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .res-label .bubble, .ev-label { animation: none; } }
